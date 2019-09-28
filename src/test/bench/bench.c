@@ -2083,6 +2083,11 @@ prog_cmd_res_t benchCmd_LoseHost(prog_process_t *process, const char *params, vo
 	return prog_cmd_RES_CONTINUE;
 }
 
+// HACK seb
+playerHdl_t dpid2commHdl(
+	dp_t *dp,
+	dpid_t id);
+
 /*
  * benchCmd_LosePeerWithRank
  *
