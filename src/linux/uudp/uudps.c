@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -76,7 +76,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define DEBUG_MODULE	!FALSE
 /* #define DPRINT(s) printf s */
 
-
 /**
 * Constants
 */
@@ -110,7 +109,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	#define clock() times(NULL)
 #endif
 
-
 /**
 * Types
 */
@@ -121,8 +119,8 @@ typedef struct sockaddr sockaddr;
 
 /* Holds an IP address and port */
 typedef struct addr_s {
-	u_long addr PACK;	/* in network order */
-	u_short port PACK;	/* in network order */
+	in_addr_t addr PACK;	/* in network order */
+	in_port_t port PACK;	/* in network order */
 } addr_t;
 
 /* Second address of a peer (can assume it's his private, internal adr) */
@@ -132,7 +130,6 @@ typedef struct uudps_peer2_s {
 
 /* Handle type */
 typedef dcst_key_t handle_t;
-
 
 /**
 * Module data
@@ -155,7 +152,6 @@ typedef struct {
 } comm_t;
 
 
-
 /**
 * Macros
 */
@@ -165,7 +161,6 @@ typedef struct {
 
 /* Get the address corresponding to the handle */
 #define getAddressFromHandle(d,h)	((addr_t*)dcstFindValue((d),(h)))
-
 
 /**
 * Methods
@@ -185,7 +180,6 @@ static void printAdr(addr_t* adr)
 	(void) adr;
 }
 
-
 /*-------------------------------------------------------------------------
  Validate a comm_t pointer
 -------------------------------------------------------------------------*/
@@ -195,7 +189,6 @@ int validateComm(void *_comm)
 /*	DPRINT(("validateComm: comm:%p magic:%x\n", comm, comm?comm->magic:0)); */
 	return (comm && (comm->magic == COMM_MAGIC));
 }
-
 
 /*-------------------------------------------------------------------------
  ** do nothing **
@@ -222,7 +215,6 @@ commNoOp(
 	resp->status = comm_STATUS_OK;
 	return TRUE;
 }
-
 
 /*--------------------------------------------------------------------------
  Return this host's ip address.
@@ -276,7 +268,6 @@ gethostaddr(
 }
 
 
-
 /*-------------------------------------------------------------------------
  Allocate a comm structure and initialize it
 -------------------------------------------------------------------------*/
@@ -294,11 +285,11 @@ int cdecl commAlloc(commAllocReq_t *req, commAllocResp_t *resp)
 	{
 		resp = &respDummy;
 	}
-   
+
    	DPRINT(("commAlloc: allocating %d bytes for comm_t\n", sizeof (comm_t)));
-	       
+
 	comm = dp_MALLOC(sizeof (comm_t));
-   
+
 	if (!comm)
 	{
 	   	DPRINT(("commAlloc: failed to allocate memory\n"));
@@ -331,10 +322,9 @@ int cdecl commAlloc(commAllocReq_t *req, commAllocResp_t *resp)
 	resp->status = comm_STATUS_OK;
 
    	assert(validateComm(*req->ptr));
-   
+
 	return (TRUE);
 }
-
 
 
 /*-------------------------------------------------------------------------
@@ -434,7 +424,7 @@ commInit(
 		int addrlen = sizeof(sockAddr);
 		int err;
 		memset(&sockAddr, 0, sizeof(sockAddr));
-		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, (int *)&addrlen);
+		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, (socklen_t *)&addrlen);
 		if(SOCKET_ERROR == err)
 			err = errno;
 		else
@@ -474,7 +464,6 @@ commInit(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Remove the communications layer.
 -------------------------------------------------------------------------*/
@@ -493,7 +482,7 @@ commTerm(
 
 	/* Stop packet logging */
 	logPkt_close(comm->logpkt_fp);
-	
+
 	/* Clean up */
 	close(comm->uudp_sock);
 	comm->uudp_sock = -1;
@@ -507,7 +496,6 @@ commTerm(
 		resp->status = comm_STATUS_OK;
 	return TRUE;
 }
-
 
 /**
 * publicly readable data for commDriverInfo().  This is publicly
@@ -552,7 +540,6 @@ commDriverInfo(
     return (TRUE);
 }
 
-
 /*-------------------------------------------------------------------------
  Retrieve info about a player, including ourselves.
  Return TRUE if the player is known and is not a group.
@@ -590,26 +577,26 @@ commPlayerInfo(
 	{
 		addr_t *ptr;
 		ptr = getAddressFromHandle(comm->uudp_handles, comm->uudp_myHdl);
-	
+
 		if (!ptr)
 		{
 			DPRINT(("commPlayerInfo: player %d (ME) : no address\n", req->player));
 			resp->status = comm_STATUS_BUG;
 			return FALSE;
-		}		
+		}
 		comm->adr = *ptr;
    	}
 	else
 	{
 		addr_t *ptr;
 		ptr = getAddressFromHandle(comm->uudp_handles, req->player);
-	
+
 		if (!ptr)
 		{
 			DPRINT(("commPlayerInfo: player %d : no address\n", req->player));
 			resp->status = comm_STATUS_BUG;
 			return FALSE;
-		}		
+		}
 		comm->adr = *ptr;
 	}
 
@@ -635,10 +622,8 @@ commPlayerInfo(
 		}
 	}
 
-
 	return TRUE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **
@@ -671,7 +656,6 @@ commTxFull(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  Send a packet.  Upon return, the buffer can be discarded, although the
@@ -743,7 +727,6 @@ commTxPkt(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  ** unimplemented **
 
@@ -773,7 +756,6 @@ commPeekPkt(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  Retrieve a pending incoming packet.
@@ -829,9 +811,9 @@ commRxPkt(
 	/* packet waiting, get it */
 	fromlen = sizeof(sockAddr);
 	nBytes = recvfrom(comm->uudp_sock, req->buffer, req->size, 0,
-			(sockaddr *)&sockAddr, &fromlen);
+			(sockaddr *)&sockAddr, (socklen_t*) &fromlen);
 	/*DPRINT(("commRxPkt: recvfrom(%d,,%d,0,,%d) returns %d.\n", uudp_sock, req->size, fromlen, nBytes));*/
-	if (nBytes == -1) {
+	if (nBytes == (unsigned) -1) {
 		resp->status = comm_STATUS_EMPTY;
 		if (errno != EWOULDBLOCK) {
 			DPRINT(("commRxPkt: recvfrom returns -1.  errno %d\n", errno));
@@ -851,7 +833,7 @@ commRxPkt(
 			short players;
 			short cur_players = SwapBytes2(comm->sessinfo->cur_players);
 			short max_players = SwapBytes2(comm->sessinfo->max_players);
-			char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
+			unsigned char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
 			dp_species_t sessType = SwapBytes2(*((dp_species_t*)p));
 			players = SwapBytes2((comm->sessinfo->players)[sessType]);
 			p += sizeof(dp_species_t); *((short *)p) = cur_players;
@@ -873,24 +855,23 @@ commRxPkt(
 	addr.addr = sockAddr.sin_addr.s_addr;
 	addr.port = sockAddr.sin_port;
 	resp->src = getHandleFromAddress(comm->uudp_handles, &addr);
-	if(dcst_INVALID_KEY == resp->src) {
+	if((unsigned) dcst_INVALID_KEY == resp->src) {
 		resp->src = PLAYER_NONE;
 		assert(sizeof(addr_t) <= comm_MAX_ADR_LEN);
 		memcpy(resp->adr, &addr, sizeof(addr_t));
-	} else if (resp->src == comm->uudp_myHdl) {
+	} else if (resp->src == (unsigned) comm->uudp_myHdl) {
 		resp->src = PLAYER_ME;
 	}
-	assert(resp->src != comm->uudp_broadcastHdl);	/* erroneous sockAddr from recvfrom */
+	assert(resp->src != (unsigned) comm->uudp_broadcastHdl);	/* erroneous sockAddr from recvfrom */
 
 	logPkt(comm->logpkt_fp, req->buffer, resp->length, resp->src, "rx");
-	
+
 	/* Return status */
 	resp->status = comm_STATUS_OK;
 	/*DPRINT(("commRxPkt: got packet %c%c, length %d, src %x\n",
 		((char*)req->buffer)[0], ((char*)req->buffer)[1], nBytes, resp->src));*/
 	return TRUE;
 }
-
 
 /*-------------------------------------------------------------------------
  Attempt to parse a NUL-terminated address string into an addr_t.
@@ -972,7 +953,6 @@ commScanAddr(
 	return (TRUE);
 }
 
-
 /*-------------------------------------------------------------------------
   Attempt to format an addr_t into a NUL-terminated string.  The string
   will be of the form 255.255.255.255:65535, where the first four numbers
@@ -1033,7 +1013,6 @@ commPrintAddr(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Tear down a data link to a player.  The link or the player may already be
  down, so don't shake hands.
@@ -1078,7 +1057,6 @@ commSayBye(
     return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
 Establish a data link to a player and shake hands with him.  This does
 not actually establish a connection in the IP sense of the word.
@@ -1118,7 +1096,7 @@ commSayHi(
 
 	/* Find or assign a handle for this address */
 	resp->player = getHandleFromAddress(comm->uudp_handles, req->address);
-	if(resp->player == dcst_INVALID_KEY) {
+	if(resp->player == (unsigned) dcst_INVALID_KEY) {
 		resp->player = dcstAdd(comm->uudp_handles, req->address);
 		if (req->address2) {
 			dcstAddEx(comm->uudp_secondary, resp->player, req->address2);
@@ -1126,20 +1104,19 @@ commSayHi(
 	}
 
 	/* Translate handles to commapi values */
-	if(resp->player == dcst_INVALID_KEY) {
+	if(resp->player == (unsigned) dcst_INVALID_KEY) {
 		resp->player = PLAYER_UNKNOWN;
 		resp->status = comm_STATUS_EMPTY;
 		return FALSE;
-	} else if(resp->player == comm->uudp_myHdl)
+	} else if(resp->player == (unsigned) comm->uudp_myHdl)
 		resp->player = PLAYER_ME;
-	else if(resp->player == comm->uudp_broadcastHdl)
+	else if(resp->player == (unsigned) comm->uudp_broadcastHdl)
 		resp->player = PLAYER_BROADCAST;
 
 	/* Return status */
 	resp->status = comm_STATUS_OK;
 	return TRUE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **
@@ -1171,7 +1148,6 @@ commGroupAlloc(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **
@@ -1232,7 +1208,6 @@ commGroupAdd(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **

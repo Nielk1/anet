@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -45,13 +45,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 /*  The key is stored immediately before the value. */
 typedef struct {
-	char keylen PACK;
-	char key[hkeytab_MAXLEN] PACK;
-	char value[1] PACK;	/*  Dummy size. */
-} hkeytab_item_t;
+	char keylen;
+	char key[hkeytab_MAXLEN];
+	char value[1];	/*  Dummy size. */
+} PACK hkeytab_item_t;
 #define sizeof_hkeytab_item_t(n) (sizeof(char) + hkeytab_MAXLEN + (n))
 
-typedef 
+typedef
 	dynatab_t
 hkeytab_t;
 
