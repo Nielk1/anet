@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -121,8 +121,8 @@ typedef struct sockaddr sockaddr;
 
 /* Holds an IP address and port */
 typedef struct addr_s {
-	u_long addr PACK;	/* in network order */
-	u_short port PACK;	/* in network order */
+	in_addr_t addr PACK;	/* in network order */
+	in_port_t port PACK;	/* in network order */
 } addr_t;
 
 /* Second address of a peer (can assume it's his private, internal adr) */
@@ -294,11 +294,11 @@ int cdecl commAlloc(commAllocReq_t *req, commAllocResp_t *resp)
 	{
 		resp = &respDummy;
 	}
-   
+
    	DPRINT(("commAlloc: allocating %d bytes for comm_t\n", sizeof (comm_t)));
-	       
+
 	comm = dp_MALLOC(sizeof (comm_t));
-   
+
 	if (!comm)
 	{
 	   	DPRINT(("commAlloc: failed to allocate memory\n"));
@@ -331,7 +331,7 @@ int cdecl commAlloc(commAllocReq_t *req, commAllocResp_t *resp)
 	resp->status = comm_STATUS_OK;
 
    	assert(validateComm(*req->ptr));
-   
+
 	return (TRUE);
 }
 
@@ -434,7 +434,7 @@ commInit(
 		int addrlen = sizeof(sockAddr);
 		int err;
 		memset(&sockAddr, 0, sizeof(sockAddr));
-		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, (int *)&addrlen);
+		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, (socklen_t *)&addrlen);
 		if(SOCKET_ERROR == err)
 			err = errno;
 		else
@@ -493,7 +493,7 @@ commTerm(
 
 	/* Stop packet logging */
 	logPkt_close(comm->logpkt_fp);
-	
+
 	/* Clean up */
 	close(comm->uudp_sock);
 	comm->uudp_sock = -1;
@@ -590,26 +590,26 @@ commPlayerInfo(
 	{
 		addr_t *ptr;
 		ptr = getAddressFromHandle(comm->uudp_handles, comm->uudp_myHdl);
-	
+
 		if (!ptr)
 		{
 			DPRINT(("commPlayerInfo: player %d (ME) : no address\n", req->player));
 			resp->status = comm_STATUS_BUG;
 			return FALSE;
-		}		
+		}
 		comm->adr = *ptr;
    	}
 	else
 	{
 		addr_t *ptr;
 		ptr = getAddressFromHandle(comm->uudp_handles, req->player);
-	
+
 		if (!ptr)
 		{
 			DPRINT(("commPlayerInfo: player %d : no address\n", req->player));
 			resp->status = comm_STATUS_BUG;
 			return FALSE;
-		}		
+		}
 		comm->adr = *ptr;
 	}
 
@@ -829,9 +829,9 @@ commRxPkt(
 	/* packet waiting, get it */
 	fromlen = sizeof(sockAddr);
 	nBytes = recvfrom(comm->uudp_sock, req->buffer, req->size, 0,
-			(sockaddr *)&sockAddr, &fromlen);
+			(sockaddr *)&sockAddr, (socklen_t*) &fromlen);
 	/*DPRINT(("commRxPkt: recvfrom(%d,,%d,0,,%d) returns %d.\n", uudp_sock, req->size, fromlen, nBytes));*/
-	if (nBytes == -1) {
+	if (nBytes == (unsigned) -1) {
 		resp->status = comm_STATUS_EMPTY;
 		if (errno != EWOULDBLOCK) {
 			DPRINT(("commRxPkt: recvfrom returns -1.  errno %d\n", errno));
@@ -851,7 +851,7 @@ commRxPkt(
 			short players;
 			short cur_players = SwapBytes2(comm->sessinfo->cur_players);
 			short max_players = SwapBytes2(comm->sessinfo->max_players);
-			char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
+			unsigned char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
 			dp_species_t sessType = SwapBytes2(*((dp_species_t*)p));
 			players = SwapBytes2((comm->sessinfo->players)[sessType]);
 			p += sizeof(dp_species_t); *((short *)p) = cur_players;
@@ -873,17 +873,17 @@ commRxPkt(
 	addr.addr = sockAddr.sin_addr.s_addr;
 	addr.port = sockAddr.sin_port;
 	resp->src = getHandleFromAddress(comm->uudp_handles, &addr);
-	if(dcst_INVALID_KEY == resp->src) {
+	if((unsigned) dcst_INVALID_KEY == resp->src) {
 		resp->src = PLAYER_NONE;
 		assert(sizeof(addr_t) <= comm_MAX_ADR_LEN);
 		memcpy(resp->adr, &addr, sizeof(addr_t));
-	} else if (resp->src == comm->uudp_myHdl) {
+	} else if (resp->src == (unsigned) comm->uudp_myHdl) {
 		resp->src = PLAYER_ME;
 	}
-	assert(resp->src != comm->uudp_broadcastHdl);	/* erroneous sockAddr from recvfrom */
+	assert(resp->src != (unsigned) comm->uudp_broadcastHdl);	/* erroneous sockAddr from recvfrom */
 
 	logPkt(comm->logpkt_fp, req->buffer, resp->length, resp->src, "rx");
-	
+
 	/* Return status */
 	resp->status = comm_STATUS_OK;
 	/*DPRINT(("commRxPkt: got packet %c%c, length %d, src %x\n",
@@ -1118,7 +1118,7 @@ commSayHi(
 
 	/* Find or assign a handle for this address */
 	resp->player = getHandleFromAddress(comm->uudp_handles, req->address);
-	if(resp->player == dcst_INVALID_KEY) {
+	if(resp->player == (unsigned) dcst_INVALID_KEY) {
 		resp->player = dcstAdd(comm->uudp_handles, req->address);
 		if (req->address2) {
 			dcstAddEx(comm->uudp_secondary, resp->player, req->address2);
@@ -1126,13 +1126,13 @@ commSayHi(
 	}
 
 	/* Translate handles to commapi values */
-	if(resp->player == dcst_INVALID_KEY) {
+	if(resp->player == (unsigned) dcst_INVALID_KEY) {
 		resp->player = PLAYER_UNKNOWN;
 		resp->status = comm_STATUS_EMPTY;
 		return FALSE;
-	} else if(resp->player == comm->uudp_myHdl)
+	} else if(resp->player == (unsigned) comm->uudp_myHdl)
 		resp->player = PLAYER_ME;
-	else if(resp->player == comm->uudp_broadcastHdl)
+	else if(resp->player == (unsigned) comm->uudp_broadcastHdl)
 		resp->player = PLAYER_BROADCAST;
 
 	/* Return status */

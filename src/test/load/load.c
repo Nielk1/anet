@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -278,7 +278,7 @@ typedef struct data_s {
 	char room_joinany[256];
 	int bWaitingToFreeze;
 	int n_loop;
-	
+
 	char nastygram_buf[NASTYGRAM_MAX_LEN];
 	char *e_mail;
 } data_t;
@@ -295,7 +295,7 @@ FILE * outfile = NULL;
 * Methods
 */
 
-void sendMailFromToSubjectBody(const char *from, const char *to, 
+void sendMailFromToSubjectBody(const char *from, const char *to,
 	const char *subject, const char *body);
 
 /*-------------------------------------------------------------------------
@@ -343,7 +343,7 @@ alarmHandler(
 	DPRINTE(("load.alarmHandler: Entry\n"));
 	if (data.e_mail && data.e_mail[0]) {
 		char temp[100];
-		
+
 		sprintf(temp, "Cannot set server to %s.\n", data.currentServer);
 		sendMailFromToSubjectBody("anet_load", data.e_mail, "Load result", temp);
 	}
@@ -545,7 +545,7 @@ processMessage(dp_t* myDP, data_t* res)
 	dpid_t idFrom;
 	dpid_t idTo;
 	char buf[dpio_MAXLEN_UNRELIABLE];
-	unsigned int size = dpio_MAXLEN_UNRELIABLE;
+	size_t size = dpio_MAXLEN_UNRELIABLE;
 	dp_result_t err;
 
 	DPRINTE(("load.processMessage: Entry\n"));
@@ -608,7 +608,7 @@ waitForHost(
 	dpid_t idFrom;
 	dpid_t idTo;
 	char buf[dpio_MAXLEN_UNRELIABLE];
-	unsigned int size = dpio_MAXLEN_UNRELIABLE;
+	size_t size = dpio_MAXLEN_UNRELIABLE;
 	dp_result_t err;
 	clock_t endClock;
 
@@ -1238,10 +1238,10 @@ handleArguments(
 					printHelp();
 					exit(load_RES_OK);
 					break;
-				/* enable program to continue onto the next host if the 
+				/* enable program to continue onto the next host if the
 				 * current one is not responding
 				 */
-				case 'k': case 'K':	
+				case 'k': case 'K':
 					if(argv[i][2] == '\0') {
 						data.abort_if_host_not_responding = FALSE;
 					} else {
@@ -1249,7 +1249,7 @@ handleArguments(
 					}
 					break;
 				/* Whom to e-mail if serious errors happen. */
-				case 'e': case 'E':	
+				case 'e': case 'E':
 					if(argv[i][2] == '\0') {
 						sprintf(buf, "Value required: %s\n%s", argv[i], usage);
 						abortRun(load_RES_BADARGS, buf);
@@ -1273,7 +1273,7 @@ handleArguments(
 		data.yield_time = MAX_YIELD;
 
 	/* Only scan the cmd list on child processes */
-	if(data.thisPlayer >= 0) 
+	if(data.thisPlayer >= 0)
 		data.cmdCount = scanCommaList(&(data.cmd), rooms);
 
 	return load_RES_OK;
@@ -1392,8 +1392,8 @@ void printResults(
  Send an e-mail message from the given sender to the given recipient.
  Sender and Recipient must be valid internet email addresses.
 -------------------------------------------------------------------------*/
-void sendMailFromToSubjectBody(const char *from, const char *to, 
-	const char *subject, const char *body) 
+void sendMailFromToSubjectBody(const char *from, const char *to,
+	const char *subject, const char *body)
 {
 #ifdef _WIN32
 	/*postie -host:internetsmtp.activision.com -file:\build\log-all.log -from:battlezone.build -s:"%rerror%" -to:dkegel@activision.com*/
@@ -1437,7 +1437,7 @@ void sendMailFromToSubjectBody(const char *from, const char *to,
 			int retCode = WEXITSTATUS(status);
 			DPRINTR(("sendMailFromToSubjectBody: sendmail failed, err %d\n", retCode));
 		}
-			
+
 	}
 #endif
 }
@@ -1497,7 +1497,7 @@ int testOne (
 	#ifdef _WIN32
 		srand(GetTickCount());
 	#endif
-	/* 
+	/*
 		WARNING: Using a randomly generated or time-based session ID
 		does not work for this test; the individual runs are started
 		at nearly the same time.
@@ -1591,7 +1591,7 @@ int testOne (
 		if (data.curCmd == 0)
 			nloop++;
 	}
-	if (data.e_mail && data.e_mail[0] && data.nastygram_buf[0]) 
+	if (data.e_mail && data.e_mail[0] && data.nastygram_buf[0])
 		sendMailFromToSubjectBody("anet_load", data.e_mail, "Load result", data.nastygram_buf);
 
 

@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -40,9 +40,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 static void exitUsage(char *msg)
 {
-	printf("\
-Usage: aehsplit <-c crash_dir> <crashlog>\n\
-	Read crashes from <crashlog>, write out analyzed text files to
+	printf("Usage: aehsplit <-c crash_dir> <crashlog>\n\
+	Read crashes from <crashlog>, write out analyzed text files to\
 	crash_dir in a format suitable for use by crshmail.pl.\n\
 	<-c crash_dir>   Index unique crashes by signature in crash_dir.\n\
 	%s\n", msg);
@@ -133,7 +132,7 @@ int main(int argc, char *argv[])
 	/* We'd like to use a file creation time or other unique stamp
 	 * to identify the atvilog.bin unambiguously, but we don't have one,
 	 * so just check that the length hasn't gotten smaller and that
-	 * there's a valid record at the offset.  If not, assume the 
+	 * there's a valid record at the offset.  If not, assume the
 	 * file has changed and start from the beginning.
 	 */
 	sprintf(DatPath, "%s/%s", CrashPath, aehsplit_DATFILE);
@@ -159,7 +158,7 @@ int main(int argc, char *argv[])
 			DPRINT(("Datfile %s is not valid\n", DatPath));
 			sprintf(tmp, "Datfile %s is not valid, delete and try again", DatPath);
 			exitUsage(tmp);
-		}	
+		}
 		fclose(fp_dat);
 		if (NULL == (fp_dat = fopen(DatPath, "w"))) {
 			DPRINT(("Can't write to datfile %s\n", DatPath));
@@ -309,7 +308,7 @@ int main(int argc, char *argv[])
 			fprintf(fp_dat, "l:%ld o:%ld", filelen, offset);
 			fclose(fp_dat);
 		}
-
+		(void)now;
 		aeh_Destroy(&aeh);	/* Clear the aeh in preparation for next read */
 	}
 
