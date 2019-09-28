@@ -33,6 +33,8 @@
 339 -v=1 Olympus Mons
 340 -v=1 Eagle's Nest
 340 -v=1 Olympus Mons
+341 -v=1 Eagle's Nest
+341 -v=1 Olympus Mons
 345 -v=1 Ganymede HQ
 345 -v=1 Elysium Outpost 1
 380 Fighter Squadron

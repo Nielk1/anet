@@ -17,6 +17,7 @@
 338 http://www.activision.com/games/battlezone/ Battlezone Japanese
 339 http://www.activision.com/games/battlezone/ Battlezone 1.3
 340 http://www.activision.com/games/battlezone/ Battlezone 1.4
+341 http://www.activision.com/games/battlezone/ Battlezone 1.5
 345 http://www.teamevolve.com/products/odyssey/ Battlezone Odyssey
 380 http://www.activision.com/games/demons/ Fighter Squadron
 381 http://www.activision.com/games/demons/ Fighter Squadron 1.5
