@@ -1,0 +1,48 @@
+72  http://www.activision.com/games/civilization/ Civilization: Call To Power
+73  http://www.activision.com/games/civilization/ Civilization: Call To Power
+74  http://www.activision.com/games/civilization/ Civilization: Call To Power World Editor Preview
+75  http://www.activision.com/games/civilization/ Civilization: Call To Power 1.1
+76  http://www.activision.com/games/civilization/ Civilization: Call To Power 1.2
+100 http://www.activision.com/games/zgi/ Zork Grand Inquisitor 1.0 English
+101 http://www.activision.com/games/zgi/ Zork Grand Inquisitor 1.0 French
+102 http://www.activision.com/games/zgi/ Zork Grand Inquisitor 1.0 Spanish
+103 http://www.activision.com/games/zgi/ Zork Grand Inquisitor 1.0 German
+105 http://www.activision.com/games/zgi/ Zork Grand Inquisitor 1.01 
+303 http://www.activision.com/games/i76/ Interstate '76
+333 http://www.activision.com/games/battlezone/ Battlezone Beta
+334 http://www.activision.com/games/battlezone/ Battlezone 1.0
+335 http://www.activision.com/games/battlezone/ Battlezone 1.01
+336 http://www.activision.com/games/battlezone/ Battlezone 1.1
+337 http://www.activision.com/games/battlezone/ Battlezone 1.2
+338 http://www.activision.com/games/battlezone/ Battlezone Japanese
+339 http://www.activision.com/games/battlezone/ Battlezone 1.3
+340 http://www.activision.com/games/battlezone/ Battlezone 1.4
+345 http://www.teamevolve.com/products/odyssey/ Battlezone Odyssey
+380 http://www.activision.com/games/demons/ Fighter Squadron
+381 http://www.activision.com/games/demons/ Fighter Squadron 1.5
+382 http://www.activision.com/games/demons/ Fighter Squadron 1.5.1
+514 http://www.activision.com/games/heavygearii/ Heavy Gear 2 Demo
+515 http://www.activision.com/games/heavygearii/ Heavy Gear 2 Beta
+516 http://www.activision.com/games/heavygearii/ Heavy Gear 2 Gamma
+517 http://www.activision.com/games/heavygearii/ Heavy Gear 2
+604 http://www.activision.com/games/i76/ I'76 Nitro Pack
+666 http://www.activision.com/games/darkreign/ Dark Reign 1.0
+667 http://www.activision.com/games/darkreign/ Dark Reign Demo
+668 http://www.activision.com/games/darkreign/ Dark Reign Downloadable Demo
+669 http://www.activision.com/games/darkreign/ Dark Reign
+777 http://www.activision.com/ Shanghai: Second Dynasty
+778 http://www.activision.com/ Shanghai: Second Dynasty 1.1
+820 http://www.activision.com/games/i82/ Interstate 82
+888 http://www.activision.com/games/dynasty/ Shanghai Dynasty
+889 http://www.activision.com/games/dynasty/ Shanghai Dynasty Demo
+890 http://www.activision.com/games/dynasty/ Shanghai Dynasty 1.1
+891 http://www.activision.com/games/dynasty/ Shanghai Dynasty 1.1 Japanese
+1010 http://www.activision.com/games/mechseries/ MechWarrior 2 BattlePack
+1020 http://www.activision.com/games/mechseries/ Titanium Netmech
+1050 http://www.activision.com/games/mechseries/ MechWarrior 2: Mercenaries 1.10
+1060 http://www.activision.com/games/mechseries/ Titanium Mercnet
+1100 http://www.activision.com/games/heavygear/ Heavy Gear 1.0
+1101 http://www.activision.com/games/heavygear/ Heavy Gear 1.1
+1102 http://www.activision.com/games/heavygear/ Heavy Gear 1.2
+1503 http://www.activision.com/games/ctp2/ Call To Power 2 
+1504 http://www.activision.com/games/ctp2/ Call To Power 2 v1.1

@@ -1,0 +1,70 @@
+65 Chat
+72 -v=1 Sumeria
+72 -v=1 Damascus
+73 -v=1 Ur
+73 -v=1 Gaul
+74 -v=1 Alexandria
+74 -v=1 Santos
+75 -v=1 Paris
+75 -v=1 Athens
+76 -v=1 Sumeria
+76 -v=1 Damascus
+76 -v=1 Japanese
+100 Port Foozle
+101 Der Untergrund
+102 Empire Souterrain
+103 El Subterráneo
+105 Der Untergrund 1.01
+105 Empire Souterrain 1.01
+105 El Subterráneo 1.01
+105 The Underground 1.01
+105 Port Foozle 1.01
+334 www.activision.com
+334 Get the patch from
+335 -v=1 www.activision.com
+335 -v=1 Get the patch from
+336 -v=1 www.activision.com
+336 -v=1 Get the patch from
+337 -v=1 www.activision.com
+337 -v=1 Get the patch from
+338 -v=1 Eagle's Nest
+338 -v=1 Olympus Mons
+339 -v=1 Eagle's Nest
+339 -v=1 Olympus Mons
+340 -v=1 Eagle's Nest
+340 -v=1 Olympus Mons
+345 -v=1 Ganymede HQ
+345 -v=1 Elysium Outpost 1
+380 Fighter Squadron
+380 Aces' Den
+381 Fighter Squadron 1.5
+381 Aces' Den 1.5
+382 Fighter Squadron 1.5.1
+514 -v=1 Demo Gearmen
+515 -v=1 Beta Gearmen
+516 -v=1 Gamma Gearmen
+517 -v=1 Gearmen
+517 -v=1 Terra Nova
+517 -v=1 Japanese
+666 *** www.activision.com ***
+666 *** Get Patch ver. 1.2 at ***
+667 Dark Reign Demo
+668 Dark Reign Demo
+669 War Room
+669 Ladder Matches
+777 -v=1 Shanghai 2nd Dynasty
+778 -v=1 SSD.SMJE v1.1 
+820 -v=1 Vegas Strip
+888 Shanghai Main Lobby
+889 Shanghai Demo Lobby
+890 Shanghai Main Lobby
+891 Shanghai Main Lobby
+1010 Battlepack War Room
+1020 Pilots' Lounge
+1050 Mercenaries' Rendezvous
+1060 Mercs' Rendezvous
+1100 Gear Locker
+1101 Gear Zone
+1102 New Gear City
+1503 Call To Power 2 
+1504 Call To Power 2 v1.1
