@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -114,12 +114,16 @@ void readSwap(const void **bp, void *dat, unsigned int size)
 void writeSwap(void **bp, const void *dat, unsigned int size)
 {
 	memcpy(*bp, dat, size);
-	(unsigned char *)*bp += size;
+	unsigned char *ucp = (unsigned char *) *bp;
+	ucp += size;
+	*bp = (void *) ucp;
 }
 void readSwap(const void **bp, void *dat, unsigned int size)
 {
 	memcpy(dat, *bp, size);
-	(unsigned char *)*bp += size;
+	unsigned char *ucp = (unsigned char *) *bp;
+	ucp += size;
+	*bp = (void *) ucp;
 }
 
 #endif

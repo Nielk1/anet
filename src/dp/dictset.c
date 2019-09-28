@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (C) 1995-2001 Activision, Inc.
 
 This library is free software; you can redistribute it and/or
@@ -65,7 +65,7 @@ MSVC's warning level is set to 4.
 
 #include <assert.h>
 #include <limits.h>
-#ifdef __MWERKS__
+#if defined(__MWERKS__) || defined(__GNUC__)
     #include <string.h>
 #else
     #include <malloc.h>
@@ -230,7 +230,7 @@ dcstCreate(
 
 	/* Check postconditions */
 	dcst_ASSERTVALID(newSet);			/* newly created set is invalid */
-	
+
 	return newSet;
 }
 
@@ -320,17 +320,17 @@ dcstAddEx(
 	value = dcstFindValue(pDcst, newkey);
 
 	/* Insert value */
-	if (value == NULL) 
+	if (value == NULL)
 	{
-		if (newkey != dcst_INVALID_KEY) 
-		{	
+		if (newkey != dcst_INVALID_KEY)
+		{
 			int hash = dcstHashvalue(pDcst, newvalue);
 
 			pDcst->keys[newkey].key = newkey;
 			memcpy(pDcst->keys[newkey].value, newvalue, pDcst->valueSize);
 			pDcst->keys[newkey].next = pDcst->htab[hash];
 			pDcst->htab[hash] = &(pDcst->keys[newkey]);
-		}	
+		}
 	}
 	else
 	{
@@ -535,7 +535,7 @@ dcstFindValue(
    particular order, as none is guaranteed.  The cb must return 0 to continue
    to next element, nonzero to end the for-each call immediately.
 *****************************************************************************/
-void 
+void
 dcstForEach(
 	dcst_t pDcst,		/* set to operate on */
 	dcst_forEach_cb cb,	/* method to call on each element */
@@ -613,7 +613,7 @@ dcstThaw(
 /*****************************************************************************
  Assert that the dictset has a consistent internal structure
 *****************************************************************************/
-void 
+void
 dcstAssertValid(
 	dcst_t pDcst,	/* set to check */
 	char* file,		/* filename for error reporting */
@@ -720,7 +720,7 @@ forEachTestCb (
 
 /*****************************************************************************
 *****************************************************************************/
-int 
+int
 main(
 	int argc,
 	char** argv)
@@ -1134,4 +1134,3 @@ main(
 }
 
 #endif /* self-test support */
-
