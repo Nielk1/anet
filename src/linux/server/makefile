@@ -11,11 +11,11 @@
 # Initial revision
 
 PACK=__attribute__ ((packed))
-COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../../h -I../../../../demo/utils -I../../../aeh -I../../../dp -I../../../score -I../../../sbd -I../../../bhttp
+COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../../h -I../../../../demo/utils -I../../../aeh -I../../../dp -I../../../score -I../../../sbd -I../../../bhttp -Wno-error
 
 default: ../../../../linux86/bin/$(DEST)
 
-OBJ_FILES = server.o servscor.o wmq.o wmqfile.o avgstat.o sbdserv.o bhttp.o /usr/lib/libbsd.a ../../../../linux86/lib/$(dp_LIB)
+OBJ_FILES = server.o servscor.o wmq.o wmqfile.o avgstat.o sbdserv.o bhttp.o ../../../../linux86/lib/$(dp_LIB)
 
 ../../../../linux86/bin/$(DEST): $(DEST)
 	if [ ! -d ../../../../linux86 ]; then mkdir ../../../../linux86; fi
