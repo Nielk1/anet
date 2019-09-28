@@ -25,7 +25,6 @@ from either the key or the value.  Neither duplicate keys nor duplicate
 values are allowed; ordering of elements is unimportant and is not
 guaranteed to be preserved in any sense.
 
-
 Implementation Notes
 --------------------
 Because of the requirement for fast lookup, we allocate a lookup scheme
@@ -37,7 +36,6 @@ lack of memory.  For that reason, we pre-allocate an element for each
 possible key (which, because of the 1:1 key-to-value mapping, is the
 most possible elements we can handle).  Thus, we never need to allocate
 during the add method.
-
 
 Copyright (c) 1997 by Activision Inc.  All rights reserved.
 
@@ -85,7 +83,6 @@ MSVC's warning level is set to 4.
 #pragma warning( disable : 4514 )
 #endif
 
-
 /**
 * Types
 */
@@ -97,7 +94,6 @@ typedef struct dcst_element_s {
 	struct dcst_element_s* next;
 } dcst_element_t;
 
-
 /* Struct for the dictionary-set itself (type declared in dictset.h) */
 struct dcst_s {
 	dcst_element_t* keys;		/* array, indexed by key, of elements */
@@ -107,7 +103,6 @@ struct dcst_s {
 	int maxKeys;				/* number of elements in keys */
 	int maxHash;				/* number of pointers in htab */
 };
-
 
 /**
 * Private Methods
@@ -127,7 +122,6 @@ dcstNextKey(
 			return i;
 	return dcst_INVALID_KEY;
 }
-
 
 /*****************************************************************************
 Return the hash index that corresponds to the value
@@ -162,7 +156,6 @@ dcstHashvalue(
 	/* Fold value to correct size and return */
 	return rVal % pDcst->maxHash;
 }
-
 
 /**
 * Public Methods
@@ -234,7 +227,6 @@ dcstCreate(
 	return newSet;
 }
 
-
 /*****************************************************************************
 Destroy a dictionary set
 *****************************************************************************/
@@ -254,7 +246,6 @@ dcstDestroy(
 	/* Check postconditions */
 	/* none */
 }
-
 
 /*****************************************************************************
 Add a value to the dictionary set.
@@ -294,7 +285,6 @@ dcstAdd(
 
 	return key;
 }
-
 
 /*****************************************************************************
 Add a value to the dictionary set using a specific key.
@@ -344,7 +334,6 @@ dcstAddEx(
 	return newkey;
 }
 
-
 /*****************************************************************************
 Replace a value in the dictionary set.
 Deletes any value associated with the key; adds the value to the set
@@ -368,7 +357,6 @@ dcstReplace(
 		dcstDeleteKey(pDcst, key);
 	return dcstAdd(pDcst, value);
 }
-
 
 /*****************************************************************************
 Replace a value in the dictionary set.
@@ -398,7 +386,6 @@ dcstReplaceEx(
 }
 
 
-
 /*****************************************************************************
 Delete a value from the dictionary set (the key is also deleted).
 It is an error to call this method with a NULL pDcst or a NULL value, or
@@ -423,7 +410,6 @@ dcstDeleteValue(
 	/* Delete by key; rely on postcondition checking in dcstDeleteKey() */
 	return dcstDeleteKey(pDcst, key);
 }
-
 
 /*****************************************************************************
 Delete a key from the dictionary set (the value is also deleted).
@@ -467,7 +453,6 @@ dcstDeleteKey(
 	return dcst_STATUS_OK;
 }
 
-
 /*****************************************************************************
 Find the key associated with the given value in the dictionary set.
 It is an error to call this method with a NULL pDcst or a NULL value.
@@ -501,7 +486,6 @@ dcstFindKey(
 	return dcst_INVALID_KEY;
 }
 
-
 /*****************************************************************************
 Find the value associated with the given key in the dictionary set
 It is an error to call this method with a NULL pDcst or invalid key.
@@ -522,7 +506,6 @@ dcstFindValue(
 		return NULL;
 	return pDcst->keys[key].value;
 }
-
 
 /*****************************************************************************
  Call a method on each member of the set
@@ -558,7 +541,6 @@ dcstForEach(
 	dcst_ASSERTVALID(pDcst);					/* set rendered invalid */
 }
 
-
 /*****************************************************************************
  Save a dictionary set to a stream
 *****************************************************************************/
@@ -580,7 +562,6 @@ dcstFreeze(
 	return dcst_STATUS_DEFERRED;
 }
 
-
 /*****************************************************************************
  Restore a dictionary set from a stream
 *****************************************************************************/
@@ -601,7 +582,6 @@ dcstThaw(
 
 	return dcst_STATUS_DEFERRED;
 }
-
 
 /**
 * Debugging support
@@ -680,7 +660,6 @@ dcstAssertValid(
 
 #endif /* debugging support */
 
-
 /**
 * Self-test support
 */
@@ -716,7 +695,6 @@ forEachTestCb (
 
 	return 0;	/* Continue */
 }
-
 
 /*****************************************************************************
 *****************************************************************************/

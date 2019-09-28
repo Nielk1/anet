@@ -298,7 +298,6 @@ MSVC's warning level is set to 4.
 #pragma warning( disable : 4514 )
 #endif
 
-
 #define DEFER_SESSION_UPDATE
 #define DP_BEACON_INT_MSEC 1000		/* How often to do frequent chores */
 
@@ -442,7 +441,6 @@ static void dprint_sess(dp_t *dp, const dp_session_t *sess, char *msg)
 #define dprint_sess(dp, sess, msg)
 #endif
 
-
 /*-------------------------------------------------------------------------
 Debugging dump routines
 -------------------------------------------------------------------------*/
@@ -512,7 +510,6 @@ void dp_assertValid(dp_t* d)
 #else
 #define dp_assertValid(d)
 #endif
-
 
 /*-------------------------------------------------------------------------
 Debugging dump routines
@@ -601,7 +598,6 @@ static void dpSwapSelectSessionPacket(dp_select_sess_packet_t *p)
 #endif
 #define dpSwapLeavePacketT(p, len) dpSwapJoinPacketT(p, len)
 
- 
 /*----------------------------------------------------------------------
  Convert a dpid into a playerHdl.
 
@@ -2422,7 +2418,6 @@ dp_group_players_cb(
 	return 0;
 }
 
-
 /* Used to mark freeze files (for Garfield fans) */
 #define dp_SIGNATURE	(0x0D1E)
 
@@ -2523,7 +2518,6 @@ dp_sessionContext_freeze(
 	return dp_RES_OK;
 }
 
-
 /*----------------------------------------------------------------------
 Thaw the contents of a dp_sessionContext_t.
 Assumes that dp contains a dptab that has already been thawed.
@@ -2613,7 +2607,6 @@ dp_sessionContext_thaw(
 	/* dp_assertValid(pSess->dp); */
 	return dp_RES_OK;
 }
-
 
 /*----------------------------------------------------------------------
 Save the current running game to a file (for use during a future dpCreate).
@@ -2859,7 +2852,6 @@ dpFreeze(
 	dp_assertValid(dp);
 	return dp_RES_OK;
 }
-
 
 /*------------------------------------------------------------------------
  Restore the current state from a stream.
@@ -3211,7 +3203,6 @@ dpThaw(
 	dp->next_beacon4 = dp->now + 4*dp->beacon_interval;
 	/* rely on dpCreate's memset(dp, 0, sizeof(dp)) to clear all fields
 	   associated with dpEnumServers, dpEnumSessions, and dpPingUser */
-
 
 	dp_assertValid(dp);
 	return dp_RES_OK;
@@ -5119,7 +5110,6 @@ dpHandleJoinSession(
 		return dp_RES_EMPTY;
 	}
 
-
 #if 1
 	{
 		char *sessbuf;
@@ -5812,7 +5802,6 @@ static dp_result_t initOpenSession(dp_t *dp, dp_session_t *s, dp_session_t *sess
 			dp_assertValid(dp);
 			return err;
 		}
-
 
 		/* If a game server is listening to our mysession table,
 		 * or if we're broadcasting it periodically on a LAN,
@@ -7290,7 +7279,6 @@ DP_API dp_result_t dpSetPlayerName(
 	subkey[1] = (char) dpGETSHORT_SECONDBYTE(id);
 	subkeylen = 2;
 
-
 	err = dptab_get_bykey(dp->myplayers, subkey, subkeylen, (void **)&playerbuf, &len);
 	if (err != dp_RES_OK) {
 		dp_assertValid(dp);
@@ -7454,7 +7442,6 @@ DP_API dp_result_t dpSetPlayerBlob(
 	subkey[0] = (char) dpGETSHORT_FIRSTBYTE(id);
 	subkey[1] = (char) dpGETSHORT_SECONDBYTE(id);
 	subkeylen = 2;
-
 
 	err = dptab_get_bykey(dp->myplayers, subkey, subkeylen, (void **)&playerbuf, &len);
 	if (err != dp_RES_OK) {
@@ -7850,7 +7837,6 @@ DP_API dp_result_t dpEnumPlayersEx(
 }
 #endif
 
-
 /*----------------------------------------------------------------------
  Enable or disable new players from entering the game.
  May only be called by host.
@@ -7877,7 +7863,6 @@ DP_API dp_result_t dpEnableNewPlayers(
 	dp_assertValid(dp);
 	return dp_RES_OK;
 }
-
 
 /******************** Sending/Receiving Datagrams ************************/
 
@@ -7943,7 +7928,6 @@ static void dp_election_start(dp_t *dp, int hostDeleted)
 	DPRINT(("dp_election_start: t:%d, yield t:%d, end t:%d; %d hosts, toWin %d, hostDeleted %d\n",
 		dp->now, dp->election_yield_deadline, dp->election_deadline,
 		nhosts, dp->election_size, hostDeleted));
-
 
 /*  Session description already gone; use one cached earlier
 	err = dpGetSessionDesc(dp, &dp->election_old_session, 0);
@@ -8863,7 +8847,6 @@ static void dpElectMaster(
 	}
 }
 
-
 /*----------------------------------------------------------------------
  Internal.
  Send system packets if needed.
@@ -8897,7 +8880,6 @@ static dp_result_t dpPoll(
 	beacon4_expired = ((long)(dp->next_beacon4 - now) < 0);
 	if (beacon4_expired)
 		dp->next_beacon4 = now + dp->beacon_interval*4;
-
 
 	/* Every beacon... */
 	if (beacon_expired) {
@@ -9061,7 +9043,6 @@ static dp_result_t dpPoll(
 #endif
 				err = dptab_send(dp->dt, dp->mysessions, dp->sess_subkey, dp->sess_subkeylen, PLAYER_BROADCAST, 1);
 
-
 			}
 
 			/* Time out old sessions - ten seconds is the limit */
@@ -9204,7 +9185,6 @@ dp_result_t dp_uid2sessid(dp_t *dp, dp_uid_t uid, char *sessidbuf, int *sessidle
 	*sessidlen = len - 2;
 	return err;
 }
-
 
 /*----------------------------------------------------------------------
  Remember the session type and id of the session the given uid most
@@ -10485,7 +10465,6 @@ DP_API dp_result_t dpCreateGroup(
 	return dp_RES_OK;
 }
 
-
 /*----------------------------------------------------------------------
  Destroy the given group; removes the group from the game session.
  The dpID will not be reused during the current session.
@@ -11258,7 +11237,6 @@ DP_API dp_result_t dpReadyToFreeze(
 	return dpio_ReadyToFreeze(dp->dpio, &errHdl);
 }
 
-
 /*----------------------------------------------------------------------
  Sets a callback to be called for incoming connections.  This is done
  via a callback translation of the dpio_setIncomingCallback mechanism.
@@ -11334,7 +11312,6 @@ DP_API dp_result_t DP_APIX dpGetCurrentTransportInfo(
 
 	return dp_RES_OK;
 }
-
 
 /************************* Turn Management *******************************/
 

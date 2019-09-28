@@ -38,7 +38,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  on which of their friends are logged in.
 --------------------------------------------------------------------------*/
 
-
 /*--------------------------------------------------------------------------
  The client should call tserv_account_login/create/activate to request a
  send_response of the given type, and call tserv_poll periodically to
@@ -1527,7 +1526,6 @@ dp_result_t tserv_account_loginW(tserv_t *tserv, const wchar_t *username, const 
 	/* tserv_poll would do this for us, but let's speed up the process */
 	tserv_send_response(tserv);
 	ASSERTMEM();
-
 
 	return dp_RES_OK;
 }

@@ -185,17 +185,14 @@ typedef dp_char_t char_t;	/* for the moment - will go away */
 #define dp_MAXLEN_UNRELIABLE (dpio_MAXLEN_UNRELIABLE - sizeof_dp_envelope_t)
 #define dp_MAXLEN_RELIABLE   (dp_MAXLEN_UNRELIABLE - sizeof_dpio_reliable_header)
 
-
 /*  High bit of karma is whether it's a pseudoplayer. */
 #define dp_KARMA_MAKE(pseudo,k) (((pseudo) ? 0x8000:0) | ((k)&0x7fff))
 #define dp_KARMA_IS_PSEUDO(karma) (((karma) & 0x8000) != 0)
-
 
 #define dp_SNAMELEN 32
 #define dp_USERFIELDLEN 10
 #define dp_PASSWORDLEN 10
 #define dp_MAX_ADR_LEN 10	/*  Size of ipx's fullNetworkAddr_t. */
-
 
 /*  Values for dp_session_t->flags.  Combine with bitwise OR. */
 #define dp_SESSION_FLAGS_OPENSESSION		0x00

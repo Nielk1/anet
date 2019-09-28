@@ -100,7 +100,6 @@ FILE *logPkt_open()
 	return NULL;
 }
 
-
 /*------------------------------------------------------------------------------
  Close the log file - use after logging is finished to be nice
 ------------------------------------------------------------------------------*/
@@ -111,7 +110,6 @@ void logPkt_close(FILE *outFile)
 	}
 	fclose(outFile);
 }
-
 
 /*------------------------------------------------------------------------------
  Log a packet to the debugging packet log file

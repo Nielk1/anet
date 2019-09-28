@@ -116,7 +116,6 @@ typedef struct bench_s
 	int				amHost;	/* TRUE if we create session, or become host */
 } bench_t;
 
-
 static bench_time_t		bench_timers[bench_NUM_TIMERS];
 static bench_t			*bench_process_list = NULL;
 static int		        bench_process_number = 0;
@@ -366,7 +365,6 @@ prog_cmd_res_t benchCmd_dpCreate(prog_process_t *process, const char *params, vo
 		return (prog_cmd_RES_ERROR);
 	}
 
-	
 #ifdef UNIX
 
 	/*
@@ -391,7 +389,6 @@ prog_cmd_res_t benchCmd_dpCreate(prog_process_t *process, const char *params, vo
 
 	return (prog_cmd_RES_CONTINUE);
 }
-
 
 /*
  * benchCmd_dpDestroy
@@ -428,7 +425,6 @@ prog_cmd_res_t benchCmd_dpDestroy(prog_process_t *process, const char *params, v
 
 	return (prog_cmd_RES_CONTINUE);
 }
-
 
 /*
  * benchCmd_dpSetGameServer
@@ -544,7 +540,6 @@ static int dp_PASCAL bench_cb_session_find(dp_session_t *sDesc, long *pTimeout,l
 	return TRUE;
 }
 
-
 /*
  * benchCmd_dpOpen
  *
@@ -646,7 +641,6 @@ prog_cmd_res_t benchCmd_dpOpen(prog_process_t *process, const char *params, void
 	return (prog_cmd_RES_CONTINUE);
 }
 
-
 /*
  * benchCmd_dpClose
  *
@@ -683,7 +677,6 @@ prog_cmd_res_t benchCmd_dpClose(prog_process_t *process, const char *params, voi
 
 	return (prog_cmd_RES_CONTINUE);
 }
-
 
 /*
  * benchCmd_dpCreatePlayer
@@ -750,7 +743,6 @@ prog_cmd_res_t benchCmd_dpCreatePlayer(prog_process_t *process, const char *para
 	return (prog_cmd_RES_CONTINUE);
 }
 
-
 /*
  * benchCmd_dpDestroyPlayer
  *
@@ -785,7 +777,6 @@ prog_cmd_res_t benchCmd_dpDestroyPlayer(prog_process_t *process, const char *par
 
 	return (prog_cmd_RES_CONTINUE);
 }
-
 
 /*
  * benchCmd_dpSend
@@ -977,7 +968,6 @@ static void dp_objectDelta2string(dp_objectDelta_packet_t *delta, char *buf)
 		break;
 	}
 }
-
 
 /*
  * benchCmd_dpReceive
@@ -1334,7 +1324,6 @@ prog_cmd_res_t benchCmd_Timer(prog_process_t *process, const char *params, void 
 	return (prog_cmd_RES_CONTINUE);
 }
 
-
 /*
  * benchCmd_Wait
  *
@@ -1497,7 +1486,6 @@ prog_cmd_res_t benchCmd_Wait(prog_process_t *process, const char *params, void *
 	bench->flag = bench_flag_WAIT;
 	return (prog_cmd_RES_WAIT);
 }
-
 
 /*
  * benchCmd_Spawn
@@ -2479,7 +2467,6 @@ int main(int argc, char **argv)
 }
 
 
-
 /*
  * bench_time_Reset
  *
@@ -2495,7 +2482,6 @@ void bench_time_Reset(int timer)
 	bench_timers[timer].min = 0xFFFFFFFF;
 	bench_timers[timer].max = 0;
 };
-
 
 /*
  * bench_time_Sample
@@ -2514,7 +2500,6 @@ void bench_time_Sample(int timer, unsigned long sample)
 		bench_timers[timer].max = (bench_timers[timer].max > sample) ? bench_timers[timer].max : sample;
 	}
 }
-
 
 /*
  * bench_time_Report
@@ -2569,7 +2554,6 @@ double bench_time_GetStdDev(int timer)
 	return (sqrt(avgsq - avg * avg));
 }
 
-
 /*
  * bench_time_GetMax
  *
@@ -2579,7 +2563,6 @@ static int bench_time_GetMax(int timer)
 	return (bench_timers[timer].max);
 }
 
-
 /*
  * bench_time_GetMin
  *
@@ -2588,7 +2571,6 @@ static int bench_time_GetMin(int timer)
 {
 	return (bench_timers[timer].min);
 }
-
 
 /*
  * bench_cb_session_join
@@ -2645,7 +2627,6 @@ void dp_PASCAL bench_cb_player_create(dpid_t id, char_t *name, long flags, void 
 	}
 }
 
-
 /*
  * bench_process_Create
  *
@@ -2683,7 +2664,6 @@ static bench_t *bench_process_Create(prog_t *program, prog_line_t *start)
 }
 
 
-
 /*
  * bench_process_Start
  *
@@ -2711,7 +2691,6 @@ prog_res_t bench_process_Start(bench_t *bench)
 	}
 	return (prog_RES_OK);
 }
-
 
 /*
  * bench_process_Stop
@@ -2758,7 +2737,6 @@ prog_res_t bench_process_Stop(bench_t *bench)
 	}
 	return (prog_RES_ERROR);
 }
-
 
 /*
  * bench_ProcessStep

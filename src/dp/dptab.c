@@ -205,7 +205,6 @@ MSVC's warning level is set to 4.
 #pragma warning( disable : 4514 )
 #endif
 
-
 #define DPRINTBUFS
 
 #ifdef DPRINTBUFS
@@ -278,7 +277,6 @@ void dptab_assertPeerXfers(dptab_t* dt)
 #define dptab_assertXfers(assoctab)
 #define dptab_assertPeerXfers(dptab)
 #endif	/* Debug-only */
-
 
 /*-------------------------------------------------------------------------
 Special debug-only logging
@@ -391,7 +389,6 @@ static void dumpPeersWhoSubscribeToTable(dptab_table_t *tab, char *lab)
 #define dumpSubscriptionsFromPeer(peer, lab)
 #define dumpPeersWhoSubscribeToTable(table, lab)
 #endif		/* Special-debug only */
-
 
 /*
 static dptab_table_t *tab2dump = NULL;
@@ -914,7 +911,6 @@ DP_API dp_result_t dptab_deleteTable(dptab_t *dptab, char *key, int keylen)
 	dptab_assertValid(dptab);
 	return dp_RES_OK;
 }
-
 
 /*--------------------------------------------------------------------------
  Get a pointer to the table with the given key.
@@ -1492,7 +1488,6 @@ dptab_varDelete(
 	dptab_assertValid(dptab);
 	return hkeytab_subscript_delete(table->vars, subkey, subkeylen);
 }
-
 
 /*--------------------------------------------------------------------------
  Set the value for item 'key'.
@@ -2513,7 +2508,6 @@ static void dptab_xferBuffer_flush(dptab_t *dptab, dptab_xferBuffer_t *xbuf)
 	dptab_xferBuffer_init(xbuf, xbuf->dest, xbuf->peer_tx);
 }
 
-
 /*--------------------------------------------------------------------------
  Is the transfer/variable small enough for one packet?
 --------------------------------------------------------------------------*/
@@ -2795,7 +2789,6 @@ dptab_update_send_large(
 	return dp_RES_OK;
 }
 
-
 /*--------------------------------------------------------------------------
 Attempt to send all transfers for this destination
 --------------------------------------------------------------------------*/
@@ -2929,7 +2922,6 @@ dptab_update_destination(
 	dumpXfers(peer->tx, "dptab_update_destination exit");
 	return dp_RES_OK;
 }
-
 
 /*--------------------------------------------------------------------------
  Call dptab_update() periodically to propagate changes.
@@ -3299,7 +3291,6 @@ dptab_handlePacket(dptab_t *dptab, playerHdl_t src, size_t len, void *buf)
 			return dp_RES_BUG;
 		}
 
-
 		/* Append to holding area. */
 		memcpy((char *)var->buf + xfer->cur_offset, payload, datalen);
 		xfer->cur_offset += datalen;
@@ -3451,7 +3442,6 @@ dptab_handlePacket(dptab_t *dptab, playerHdl_t src, size_t len, void *buf)
 	return dp_RES_OK;
 }
 
-
 #define FREEZE_AND_THAW 1
 #if FREEZE_AND_THAW
 
@@ -3503,7 +3493,6 @@ dptab_tableRef_freeze(
 	return dp_RES_OK;
 }
 
-
 /*-----------------------------------------------------------------------
  Restore a reference to a dptab_table_t from disk.
  Requires that the table's state has been restored (dptab_table_thaw()
@@ -3554,7 +3543,6 @@ dptab_tableRef_thaw(
 
 	return dp_RES_OK;
 }
-
 
 /*-----------------------------------------------------------------------
  Save the state of a dptab_table_t to disk.
@@ -3657,7 +3645,6 @@ dptab_table_freeze(
 	DPRINT(("dptab_table_freeze: table %s ends at %ld file-bytes\n", key2a(table->key, table->keylen), ftell(fp)));
 	return dp_RES_OK;
 }
-
 
 /*-----------------------------------------------------------------------
  Restore the state of a dptab_table_t from disk and add it to the dptab_t.
@@ -3811,7 +3798,6 @@ dptab_table_thaw(
 	return dp_RES_OK;
 }
 
-
 /*-----------------------------------------------------------------------
  Save the state of a dptab_xfer_t to disk.
 -----------------------------------------------------------------------*/
@@ -3858,7 +3844,6 @@ dptab_xfer_freeze(
 	DPRINT(("xfer %d ends at %ld file-bytes\n", xfer->xferid, ftell(fp)));
 	return dp_RES_OK;
 }
-
 
 /*-----------------------------------------------------------------------
  Restore the state of a dptab_xfer_t from disk.
@@ -3945,7 +3930,6 @@ dptab_xfer_thaw(
 	return dp_RES_OK;
 }
 
-
 /*-----------------------------------------------------------------------
  Save the state of a dptab_peer_t to disk.
 -----------------------------------------------------------------------*/
@@ -4023,7 +4007,6 @@ dptab_peer_freeze(
 	DPRINT(("peer h:%x ends at %ld file-bytes\n", hdl, ftell(fp)));
 	return dp_RES_OK;
 }
-
 
 /*-----------------------------------------------------------------------
  Restore the state of a dptab_peer_t from disk and add it to the dptab_t.
@@ -4151,7 +4134,6 @@ dptab_peer_thaw(
 	return dp_RES_OK;
 }
 
-
 /*-----------------------------------------------------------------------
  Save the state of a dptab_t to disk.
 -----------------------------------------------------------------------*/
@@ -4215,7 +4197,6 @@ dptab_freeze(
 	DPRINT(("dptab ends at %ld file-bytes\n", ftell(fp)));
 	return dp_RES_OK;
 }
-
 
 /*-----------------------------------------------------------------------
  Restore the state of a dptab_t from disk.
@@ -4290,7 +4271,6 @@ dptab_thaw(
 }
 
 #endif /* FREEZE_AND_THAW */
-
 
 #ifdef dptab_UNITTEST
 

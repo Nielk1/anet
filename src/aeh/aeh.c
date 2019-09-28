@@ -1129,7 +1129,6 @@ int aeh_getAllInfo(aeh_t *aeh, aeh_mapcat_t *aehmapcat)
 	return aeh_RES_OK;
 }
 
-
 static int parseDispCardInfo(const char *dispCard, char *szName, char *szDriver, unsigned long *VersionMS, unsigned long *VersionLS)
 {
 	const char *pbuf = dispCard;

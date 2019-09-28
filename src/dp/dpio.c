@@ -493,7 +493,6 @@ static dp_result_t dpio_put_unreliable_unbuffered(dpio_t *dpio, playerHdl_t dest
 #pragma warning( disable : 4514 )
 #endif
 
-
 /* Upper bound on retries.
  * Want 40 second timeout.
  * If the RTT is 50msec, and max retrans interval is 4 seconds,
@@ -530,7 +529,6 @@ static int dpio_log_dropped;
 #endif
 
 #define DP_MODEL_DELAY
-
 
 /* Function to dump a block of memory in hex */
 #ifdef VERYVERBOSE
@@ -943,7 +941,6 @@ dp_result_t dpio_closeHdlRaw(dpio_t *dpio, playerHdl_t h)
 	return dp_RES_OK;
 }
 
-
 /*-------------------------------------------------------------------------
 Freeze a player handle.
 
@@ -1016,7 +1013,6 @@ dpio_freezeHdl(
 	DPRINT((", flags=%d\n", resp.flags));
 	return dp_RES_OK;
 }
-
 
 /*-------------------------------------------------------------------------
 Thaw a player handle.
@@ -1101,7 +1097,6 @@ dpio_thawHdl(
 
 	return dp_RES_OK;
 }
-
 
 #define dpio_SIG_START "dpio\1\3"
 #define dpio_SIG_END   "\7\4dpio"
@@ -1296,7 +1291,6 @@ static dp_result_t dpio_thaw2(dpio_t *dpio, FILE *fp)
 	return dp_RES_OK;
 }
 
-
 /*------------------------------------------------------------------------
  For debugging purposes only.
  Force dpio to drop a given percentage of all packets (randomly) on
@@ -1427,7 +1421,6 @@ void dpio_set_clocks(dpio_t *dpio, int clocksPerSec)
 	DPRINT(("dpio_set_clocks: cps:%d minTx:%d maxTx:%d maxRx:%d lat:%d\n",
 		clocksPerSec, dpio->minTxInterval, dpio->maxTxInterval, dpio->maxRxInterval, dpio->latency));
 }
-
 
 /*--------------------------------------------------------------------------
  This function has been superceeded by dpio_hdl2adr2 (below)
@@ -2135,7 +2128,6 @@ short dpio_getHdlRemoteCapabilities(dpio_t *dpio, playerHdl_t h)
 }
 
 
-
 /*-----------------------------------------------------------------------
  This function has be superceeded by dpio_openHdl2 (below)
 -----------------------------------------------------------------------*/
@@ -2148,7 +2140,6 @@ playerHdl_t dpio_openHdl(dpio_t *dpio, void *adr, dpioOpenHdlCallback_t cb, void
   /* use enhanced function to do the work */
   return (dpio_openHdl2(dpio, adr, NULL));
 }
-
 
 /*-----------------------------------------------------------------------
  Given a network address, open a handle to it.
@@ -2314,7 +2305,6 @@ playerHdl_t dpio_openHdl2(dpio_t *dpio, void *adr, void *adr2)
 		DPRINT(("dpio_openHdl: error: sending to h:%x got err %d; will retransmit\n",
 			h, err));
 
-
 #ifdef dp_STATS
 	dpio->stats[dp_STAT_DPIO_TX_REL_PKTS].out++;
 	dpio->stats[dp_STAT_DPIO_TX_REL_BYTES].out += pktlen;
@@ -2329,7 +2319,6 @@ playerHdl_t dpio_openHdl2(dpio_t *dpio, void *adr, void *adr2)
 	dpio_assertValid(dpio);
 	return h;
 }
-
 
 
 #ifdef dp_STATS
@@ -3745,7 +3734,6 @@ dp_result_t dpio_get(
 			pc->remote_capabilities = *remcap;
 		}
 
-
 		pw = &pc->rx;
 		/* Accept the initial packet number from the SYN packet */
 		/* If he sends a SYN followed by data, and the SYN
@@ -4486,7 +4474,6 @@ int dpio_localQ_npkts(dpio_t *dpio)
 	return (q_MAXELS - 1 - q_nfree(dpio->localMsgQ));
 }
 
-
 /*--------------------------------------------------------------------------
  Get a list of currently active connection handles
  Returns number of handles.  Will not overflow buffer; if buffer size is
@@ -4876,7 +4863,6 @@ dp_result_t dpio_update(dpio_t *dpio)
 	dpio_assertValid(dpio);
 	return dp_RES_EMPTY;	/* No packets to transmit */
 }
-
 
 #if defined(dpio_LOG) && (defined(DEBUG) || defined(_DEBUG))
 #include <time.h>

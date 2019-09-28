@@ -140,7 +140,6 @@ MSVC's warning level is set to 4.
 #include "anet.h"
 #include "../../dp/ptimer.h"
 
-
 /* Mac replacements for some "standard" DOS stuff. */
 #ifdef __MWERKS__
 #include "stricmp.h"
@@ -162,7 +161,6 @@ MSVC's warning level is set to 4.
 
 /* Define this to keep track of the player list */
 /* #define PLAYER_LIST_STORED 1 */
-
 
 /**
 * Debugging support
@@ -211,7 +209,6 @@ MSVC's warning level is set to 4.
 #define load_RES_DPERR			6	/* error calling dp library */
 #define load_RES_HOSTLOST		7	/* lost host */
 #define load_RES_TIMEOUT		8	/* too much time passed */
-
 
 long cps2ms(clock_t t)
 {
@@ -283,7 +280,6 @@ typedef struct data_s {
 	char *e_mail;
 } data_t;
 
-
 /**
 * Global variables
 */
@@ -310,7 +306,6 @@ abortRun(
 	DPRINTR(("load.abortRun Aborting(%d): %s\n", exitCode, message));
 	exit(exitCode);
 }
-
 
 /*-------------------------------------------------------------------------
  Handle a signal (^C or similar)
@@ -377,7 +372,6 @@ open_cb(
 	return (ps != NULL);
 }
 
-
 /*-------------------------------------------------------------------------
  Callback triggered by listing sessions.
 -------------------------------------------------------------------------*/
@@ -415,7 +409,6 @@ listSessions_cb(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Join the first session that matches the given name.
  User must have called listSesions() first.
@@ -449,7 +442,6 @@ joinSessionByName(
 	DPRINTE(("load.joinSessionByName: Exit, returning %d\n", err));
 	return err;
 }
-
 
 /*-------------------------------------------------------------------------
  Callback triggered by creating a player.
@@ -490,7 +482,6 @@ create_player_cb(
 	(void) flags;
 	DPRINTE(("load.create_player_cb: Exit\n"));
 }
-
 
 /*-------------------------------------------------------------------------
  Callback triggered by listing players.
@@ -534,7 +525,6 @@ listPlayers_cb(
 	(void) flags;
 	DPRINTE(("load.listPlayers_cb: Exit\n"));
 }
-
 
 /*-------------------------------------------------------------------------
  Handle a received message, if any.
@@ -595,7 +585,6 @@ processMessage(dp_t* myDP, data_t* res)
 	DPRINTE(("load.processMessage: Exit\n"));
 }
 
-
 /*-------------------------------------------------------------------------
 Wait timeout sec for a host-not-responding message; return when one
 found or timeout is over or host is ready.
@@ -629,7 +618,6 @@ waitForHost(
 	}
 	return load_RES_OK;
 }
-
 
 /*-------------------------------------------------------------------------
 Simulate activity of one session for one user.
@@ -901,7 +889,6 @@ simulateUserGame(
 	return load_RES_OK;
 }
 
-
 /*-------------------------------------------------------------------------
 Read a comma, vertical bar or semicolon-separated list from a string.  Adjacent
 commas will produce a zero-length string as a list element.
@@ -936,7 +923,6 @@ scanCommaList(
 	/* Return number of elements in list */
 	return count;
 }
-
 
 /*-------------------------------------------------------------------------
 Set the server used.
@@ -1010,7 +996,6 @@ setServer(
 	return dp_RES_OK;
 }
 
-
 static char* helpMsg[] = {
 "Usage: load <argument list>",
 "\nHelp Argument:",
@@ -1060,7 +1045,6 @@ printHelp()
 	for(i = 0; i < (sizeof(helpMsg)/sizeof(char*)); i++)
 		puts(helpMsg[i]);
 }
-
 
 /*-------------------------------------------------------------------------
  Handle command-line arguments
@@ -1279,7 +1263,6 @@ handleArguments(
 	return load_RES_OK;
 }
 
-
 /*-------------------------------------------------------------------------
  Launch all tests
 -------------------------------------------------------------------------*/
@@ -1334,7 +1317,6 @@ void launch (
 #endif
 	}
 }
-
 
 /*-------------------------------------------------------------------------
 Give this one's figure-of-merit
@@ -1594,11 +1576,9 @@ int testOne (
 	if (data.e_mail && data.e_mail[0] && data.nastygram_buf[0])
 		sendMailFromToSubjectBody("anet_load", data.e_mail, "Load result", data.nastygram_buf);
 
-
 	DPRINTE(("load.testOne: Exit\n"));
 	return load_RES_OK;
 }
-
 
 /*-------------------------------------------------------------------------
  Entry point

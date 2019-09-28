@@ -223,7 +223,6 @@ static int aeh_map_algWrite(aeh_map_t *aehmap, char *algpath) {
 	return aeh_RES_OK;
 }
 
-
 /* Open a msdevstudio msvc4.2 .map file and parse it
  * generates a list of function names and their start addresses
  * returns aeh_RES_EMPTY if could not load file / file out of date */

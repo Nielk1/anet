@@ -76,7 +76,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define DEBUG_MODULE	!FALSE
 /* #define DPRINT(s) printf s */
 
-
 /**
 * Constants
 */
@@ -110,7 +109,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	#define clock() times(NULL)
 #endif
 
-
 /**
 * Types
 */
@@ -133,7 +131,6 @@ typedef struct uudps_peer2_s {
 /* Handle type */
 typedef dcst_key_t handle_t;
 
-
 /**
 * Module data
 */
@@ -155,7 +152,6 @@ typedef struct {
 } comm_t;
 
 
-
 /**
 * Macros
 */
@@ -165,7 +161,6 @@ typedef struct {
 
 /* Get the address corresponding to the handle */
 #define getAddressFromHandle(d,h)	((addr_t*)dcstFindValue((d),(h)))
-
 
 /**
 * Methods
@@ -185,7 +180,6 @@ static void printAdr(addr_t* adr)
 	(void) adr;
 }
 
-
 /*-------------------------------------------------------------------------
  Validate a comm_t pointer
 -------------------------------------------------------------------------*/
@@ -195,7 +189,6 @@ int validateComm(void *_comm)
 /*	DPRINT(("validateComm: comm:%p magic:%x\n", comm, comm?comm->magic:0)); */
 	return (comm && (comm->magic == COMM_MAGIC));
 }
-
 
 /*-------------------------------------------------------------------------
  ** do nothing **
@@ -222,7 +215,6 @@ commNoOp(
 	resp->status = comm_STATUS_OK;
 	return TRUE;
 }
-
 
 /*--------------------------------------------------------------------------
  Return this host's ip address.
@@ -274,7 +266,6 @@ gethostaddr(
 	}
 	return TRUE;
 }
-
 
 
 /*-------------------------------------------------------------------------
@@ -334,7 +325,6 @@ int cdecl commAlloc(commAllocReq_t *req, commAllocResp_t *resp)
 
 	return (TRUE);
 }
-
 
 
 /*-------------------------------------------------------------------------
@@ -474,7 +464,6 @@ commInit(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Remove the communications layer.
 -------------------------------------------------------------------------*/
@@ -507,7 +496,6 @@ commTerm(
 		resp->status = comm_STATUS_OK;
 	return TRUE;
 }
-
 
 /**
 * publicly readable data for commDriverInfo().  This is publicly
@@ -551,7 +539,6 @@ commDriverInfo(
     resp->status = comm_STATUS_OK;
     return (TRUE);
 }
-
 
 /*-------------------------------------------------------------------------
  Retrieve info about a player, including ourselves.
@@ -635,10 +622,8 @@ commPlayerInfo(
 		}
 	}
 
-
 	return TRUE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **
@@ -671,7 +656,6 @@ commTxFull(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  Send a packet.  Upon return, the buffer can be discarded, although the
@@ -743,7 +727,6 @@ commTxPkt(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  ** unimplemented **
 
@@ -773,7 +756,6 @@ commPeekPkt(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  Retrieve a pending incoming packet.
@@ -891,7 +873,6 @@ commRxPkt(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Attempt to parse a NUL-terminated address string into an addr_t.
 
@@ -972,7 +953,6 @@ commScanAddr(
 	return (TRUE);
 }
 
-
 /*-------------------------------------------------------------------------
   Attempt to format an addr_t into a NUL-terminated string.  The string
   will be of the form 255.255.255.255:65535, where the first four numbers
@@ -1033,7 +1013,6 @@ commPrintAddr(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  Tear down a data link to a player.  The link or the player may already be
  down, so don't shake hands.
@@ -1077,7 +1056,6 @@ commSayBye(
     resp->status = comm_STATUS_OK;
     return TRUE;
 }
-
 
 /*-------------------------------------------------------------------------
 Establish a data link to a player and shake hands with him.  This does
@@ -1140,7 +1118,6 @@ commSayHi(
 	return TRUE;
 }
 
-
 /*-------------------------------------------------------------------------
  ** unimplemented **
 
@@ -1171,7 +1148,6 @@ commGroupAlloc(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **
@@ -1232,7 +1208,6 @@ commGroupAdd(
 	resp->status = comm_STATUS_UNIMPLEMENTED;
 	return FALSE;
 }
-
 
 /*-------------------------------------------------------------------------
  ** unimplemented **

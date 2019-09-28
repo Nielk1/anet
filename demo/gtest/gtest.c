@@ -405,7 +405,6 @@ static int round = 0;
 static int my_nPlayer = 0;
 static time_t turnstart, turnend;
 
-
 static char		adrString[256];
 static short	defaultSessType;
 dp_transport_t 	CommDLLName;
@@ -1000,7 +999,6 @@ dp_result_t countMyPlayers(dp_t *dp)
 -------------------------------------------------------------------------*/
 int 	dp_PASCAL create_sess_cb(dp_session_t *ps, long *pTimeout,long flags, void *context)
 
-
 {
 	if (ps) {
 		stuffChatText("*****", "Created session.");
@@ -1421,7 +1419,6 @@ static void setval(const char *s, int val)
 	}
 	DPRINT(("setval(%s, %d)\n", s, val));
 }
-
 
 /* Access a constant or internal gtest variable from within a script.
  * Constants are assumed to be
@@ -3490,7 +3487,6 @@ void ProcessCommandLine(int argc, char **argv) {
   }
 }
 
-
 #if 0
 __declspec(dllexport) int fakemain( int argc, char *argv[] )
 #elif defined(_WIN32)
@@ -3873,7 +3869,6 @@ int gtest( int argc, char *argv[] )
 				stuffChatText("*****", buf);
 				break;
 
-	
 			case dppt_MAKE(0, 1):
 #ifdef USE_DPIO
 				if (dpio) sprintf(nameBuf, "%d", idFrom);

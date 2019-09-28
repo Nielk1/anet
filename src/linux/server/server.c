@@ -387,7 +387,6 @@ char *FindTag(const char *inp, FILE *out, char **tagname, int *arg)
 	return NULL;
 }
 
-
 #define tagcompare(x, y) !strnicmp(x, y, strlen(y))
 
 /* get the next line from input string */
@@ -1045,7 +1044,6 @@ static void updateHTMLFile()
 	}
 	fclose(fp);
 }
-
 
 /*-------------------------------------------------------------------------
  Read commandline arguments into globals.  Return 0 on success.

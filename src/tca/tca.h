@@ -87,7 +87,6 @@ typedef struct {
 	/* a random challenge generator's data would go here */
 } tca_t;
 
-
 /*--------------------------------------------------------------------------
   Create an instance of the trivial challenge authenticator module.
   Called by both client and server.

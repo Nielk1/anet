@@ -491,7 +491,6 @@ dptab_table_thaw(
 
 DP_API dp_result_t dptab_update(dptab_t *dptab);
 
-
 /*********** Table Management ***********/
 
 /*--------------------------------------------------------------------------
@@ -600,7 +599,6 @@ DP_API dptab_table_t *dptab_getTable(dptab_t *dptab, char *key, int keylen);
 --------------------------------------------------------------------------*/
 #define dptab_size(dptab)  (dptab->tables->n_used)
 
-
 /*********** Subscription management ***********/
 
 /*--------------------------------------------------------------------------
@@ -681,7 +679,6 @@ DP_API dp_result_t dptab_addPeer(dptab_t *dptab, playerHdl_t dest);
  or publisher lists.  No remote action occurs.
 --------------------------------------------------------------------------*/
 DP_API dp_result_t dptab_deletePeer(dptab_t *dptab, playerHdl_t dest);
-
 
 /*********** Item management ***********/
 

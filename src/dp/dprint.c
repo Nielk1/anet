@@ -201,7 +201,6 @@ DP_API void dp_enableDebugPrint(int enable)
 	}
 }
 
-
 /*
  *	Read a "[Debug]" section parameter from the .INI file.  Strip
  *	off any trailing comments.
@@ -359,7 +358,6 @@ dp_dprintf(
 
 	if (!writeMe)
 		return (0);
-
 
 	if (dprint.toNull) {	/* Do nothing */
 		;

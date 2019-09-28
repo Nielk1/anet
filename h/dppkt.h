@@ -241,7 +241,6 @@ typedef struct {
 	(dpio_MAXLEN_UNRELIABLE-sizeof_dp_playerList_packet_t(0)-sizeof(dp_packetType_t)) \
 	/sizeof(dp_playerId_t))
 
-
 /*
  * This packet gets is from a game server to a session host requesting
  * that a connection be opened to that specified address pair
@@ -296,7 +295,6 @@ typedef struct
  * for this stream (TCP/IP Illustrated, Volume 1, pg. 231)
  */
 #define dpio_SYN_PACKET_ID			dppt_MAKE(dp_PACKET_INITIALBYTE,'Y')
-
 
 /*
  * A packet used to actively close a connection

@@ -806,7 +806,6 @@ dp_result_t dpHandleServerPingResponsePacket(
 	 */
 	dptab_set(dp->dt, dp->serverpings, adrbuf, dp->dpio->myAdrLen, &serv, sizeof(serv), 1, PLAYER_ME);
 
-
 	DPRINT(("dpHandleServerPingResponsePacket: host %s, rtt %d, loss %d%%; sent at T:%d, now t:%d\n",
 			serv.hostname, serv.rtt_ms_avg, serv.loss_percent, tStart, dp->now));
 
