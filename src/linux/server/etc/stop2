@@ -7,15 +7,16 @@
 . ~/etc/anet2env
 
 # Find and stop the server
-ps auxww | grep $ANET2_EXEC | grep -v grep | awk '{print $2}' > /tmp/anet2.pid 
+ps auxww | grep $ANET2_EXEC | grep -v grep | awk '{print $2}' > /tmp/anet2.pid
 if [ -s /tmp/anet2.pid ]; then
    echo Stopping game server at `date`
    kill -TERM `cat /tmp/anet2.pid`
    i=30
-   while [ -s /tmp/anet2.pid -a $i -ne 0 ]; do
-       i=$[$i-1]
+   while [ -s /tmp/anet2.pid ] && [ $i -ne 0 ]; do
+       i=$(($i-1))
        sleep 1
-       ps auxww | grep `cat /tmp/anet2.pid` | grep -v grep | awk '{print $2}' > /tmp/anet2.pid 
+       stop=`cat /tmp/anet2.pid` # this is the only way to stop a wierd bug where it sees it as empty before it writes empty
+       ps auxww | grep $stop | grep -v grep | awk '{print $2}' > /tmp/anet2.pid
    done
    if [ $i -eq 0 ]; then
        kill -9 `cat /tmp/anet2.pid`
