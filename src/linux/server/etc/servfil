@@ -17,7 +17,7 @@ typechngd=0
 
 echo starting servfil `date`
 for file in names servers apps types; do
-   wget -O $TMPDIR/$file.tmp -t 300 http://www.kegel.com/anet/master/$file.txt
+   wget -O $TMPDIR/$file.tmp -t 300 https://nielk1.github.io/anet/master/$file.txt
    if [ -s $TMPDIR/$file.tmp ]; then
       i=`grep -c "<HTML>" $TMPDIR/$file.tmp`
       if [ $i -eq 0 ]; then
