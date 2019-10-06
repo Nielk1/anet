@@ -255,9 +255,9 @@ typedef struct {
 
 /* Default bootstrap server list */
 static myhostname_t default_bootstrap[] = {
-	{"192.215.160.71",  "us1.alink.activision.com"},
-	{"192.215.160.72",  "us2.alink.activision.com"},
-	{"194.131.8.12",    "uk1.activision.co.uk"},
+	/*{"192.215.160.71",  "us1.alink.activision.com"},*/
+	/*{"192.215.160.72",  "us2.alink.activision.com"},*/
+	/*{"194.131.8.12",    "uk1.activision.co.uk"},*/
 
 	/*{"203.35.167.100",  "australia1.activision.com"},*/
 	/*{"207.82.192.39",   "california12.activision.com"},*/
